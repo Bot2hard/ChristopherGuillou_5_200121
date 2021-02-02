@@ -1,7 +1,7 @@
 // Recuperation de la fonction lié a l'API
 
 const afficheProduit = (fur) =>{
-// Lien avec la page index.html
+// racine semantique de la page index.html
 
 let listArticle = document.getElementById("listArticle");
 
@@ -28,27 +28,30 @@ let prixMeuble = document.createElement("p");
 
 let choixMeuble = document.createElement("a");
       choixMeuble.setAttribute("href", "produit.html?id=" + fur._id);
+      //console.log(choixMeuble); test result 5 id 
       choixMeuble.setAttribute("class", "info_Meuble");
-
-
-//  Et agengement semantique
+      
+//  Et mise en forme de la semantique
 
    listArticle.appendChild(divMeuble);
    divMeuble.appendChild(meubleContenerImg);
    meubleContenerImg.appendChild(imageMeuble);
    divMeuble.appendChild(meubleText);
-   divMeuble.appendChild(meubleText);
    meubleText.appendChild(nomMeuble);
    meubleText.appendChild(prixMeuble);
    meubleText.appendChild(choixMeuble);
 
-//  envoie du contenu "json" vers les balises
+//  envoie de contenu vers les balises
 
    nomMeuble.textContent = fur.name;
    prixMeuble.textContent = "prix : " + fur.price / 100 + " €";
    choixMeuble.textContent = "Informations";
 
-}
+  
+
+
+
+            }
 
 
 
