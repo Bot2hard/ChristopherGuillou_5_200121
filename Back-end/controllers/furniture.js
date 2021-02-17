@@ -5,7 +5,7 @@ exports.getAllFurniture = (req, res, next) => {
   Furniture.find().then(
     (furniture) => {
       const mappedFurniture = furniture.map((item) => {
-        console.log("999999999999999999999" + item);
+        
         item.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + item.imageUrl;
       
         return item;

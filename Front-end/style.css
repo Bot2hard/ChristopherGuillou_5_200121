@@ -1,244 +1,263 @@
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+}
+
 /*  
         Css Header 
 */
 
-
-.navigation{
-    padding: 0.625em 6.25em;
-    display: flex;
-    align-items: center;
-    box-shadow: 0em 0.188em 0.938em #ffa600;
-    margin-bottom: 1em;
+.navigation {
+  padding: 0.625em 6.25em;
+  display: flex;
+  align-items: center;
+  box-shadow: 0em 0.188em 0.938em #ffa600;
+  margin-bottom: 1em;
 }
-.logo-lien{
-    margin-right: auto;
+.logo-lien {
+  margin-right: auto;
 }
-.logo-image{
-    width: 12.5em;
-    height: auto;
+.logo-image {
+  width: 12.5em;
+  height: auto;
 }
 .nav-liens:link,
-.nav-liens:visited{
-    text-decoration: none;
-    font-size: 1.25em;
-    padding: 0.625em 1.563em;
-    text-transform: uppercase;
-    font-weight: 600;
-    display: inline-block;
-    width: 6.25em;
-    text-align: center;
-    color: #222222;
-
+.nav-liens:visited {
+  text-decoration: none;
+  font-size: 1.25em;
+  padding: 0.625em 1.563em;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline-block;
+  width: 6.25em;
+  text-align: center;
+  color: #222222;
 }
-.nav-liens:not(:last-child){
-    border-right: 1px solid #ffee00;
+.nav-liens:not(:last-child) {
+  border-right: 1px solid #ffee00;
 }
-.nav-liens:hover{
-    background-color:#ffee00;
-    color: #222222;
+.nav-liens:hover {
+  background-color: #ffee00;
+  color: #222222;
 }
-
 
 /*
-        css index.html 
+            css index.html 
 */
 
+h1 {
+  text-align: center;
+  font-size: 2em;
+  width: 100%;
+  margin-bottom: 2em;
+}
+#listArticle {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.div_Meuble {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 15em;
+  margin-bottom: 2em;
+  border: 2px solid #000000;
+  border-radius: 1.25em;
+  text-decoration: none;
+  color: black;
+}
+.meuble_contener_img {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+.meuble_contener_img img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.5em;
+}
+.meuble_text {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 1.25em;
+  width: 100%;
+  height: 22%;
+  background: rgba(255, 255, 255, 0.5);
+}
 
-h1{
-    text-align: center;
-    font-size: 2em;
+.nom_Meuble {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 40%;
+}
+.info_Meuble {
+  width: 6em;
+  height: 1.3em;
+  border: 2px solid black;
+  border-radius: 1.25em;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+.info_Meuble:hover {
+  transform: scale(1.1);
+  background-color: black;
+  color: #fff;
+  transition: 0.5s all ease-in-out;
+}
+.prix_Meuble {
+  font-weight: bold;
+}
+/*
+          Css produit.html
+*/
+
+.unit_Meuble {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgb(252, 136, 42);
+}
+
+.unit_meuble_contener_img {
+  background-color: burlywood;
+}
+.unit_meuble_contener_img img {
+  display: flex;
+  width: 100%;
+  height: 30em;
+  object-fit: cover;
+}
+.unit_meuble_text {
+  margin-left: 1em;
+}
+.form_quantite,
+.input_meuble {
+  margin-top: 2em;
+}
+.input_meuble {
+  border-radius: 1.25em;
+  cursor: pointer;
+}
+/*
+        CSS panier.html
+*/
+.etatPanier {
+  display: flex;
+  width: 100%;
+  border: 1px dotted black;
+}
+.etatPanier img {
+  width: 33%;
+}
+.divpanier {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  justify-content: space-around;
+  background-color: cadetblue;
+}
+.delete_item {
+  width: 5%;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 1800px) {
+  .nav-liens:link,
+  .nav-liens:visited {
+    font-size: 1em;
+    padding: 0.625em;
+  }
+  .navigation {
+    padding: 0.625em 3.125em;
+  }
+  .logo-image {
+    width: 9.375em;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .nav-liens:link,
+  .nav-liens:visited {
+    font-size: 1em;
+    padding: 0.625em;
+  }
+  .navigation {
+    padding: 0.625em 3.125em;
+  }
+  .logo-image {
+    width: 9.375em;
+  }
+}
+@media only screen and (max-width: 940px) {
+  .navigation {
+    flex-direction: column;
+  }
+  .logo-lien {
+    margin-right: 0em;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .nav-liens:link,
+  .nav-liens:visited {
+    display: block;
+  }
+  .nav-liens:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #ffee00;
+  }
+
+  .div_Meuble {
+    display: flex;
     width: 100%;
-    margin-bottom: 2em;
-}
-#listArticle{
-    display: flex;
-    flex-flow: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.div_Meuble{
-    display: flex;
-    align-items: flex-end;
-    position: relative;
-    overflow: hidden;
-    width: 26%;
     height: 15em;
     margin-bottom: 2em;
     border: 2px solid #000000;
-    border-radius:  1.25em;
-}
-.meuble_contener_img{
+    border-radius: 1.25em;
+  }
+  .meuble_contener_img {
+    display: flex;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1; 
-}
-.meuble_contener_img img{
+  }
+  .meuble_contener_img img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    border-radius: 1.25em 0 0 1.25em;
     margin-bottom: 0.5em;
-}
-.meuble_text{
-    
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 1.25em;
-    width: 100%;
-    height: 22%;
-    background: rgba(255, 255, 255, .5);
-}
-
-
-.nom_Meuble{
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 40%;
   }
-.info_Meuble{
-    width: 6em;
-    height: 1.3em;
-    border:2px solid black;
-    border-radius: 1.25em;
+
+  .nom_Meuble {
+    width: 60%;
+    font-size: 1em;
+  }
+
+  .meuble_text {
+    display: flex;
+
+    align-items: center;
     text-align: center;
+    justify-content: space-around;
     text-decoration: none;
     color: black;
-}
-.info_Meuble:hover{
-    transform: scale(1.1);
-    background-color: black;
-    color: #fff;
-    transition: .5s all ease-in-out;
-}
-.prix_Meuble{
-    
-    font-weight: bold;
-    
-}
-/*
-    Css produit.html
-*/
-
-.unit_Meuble{
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid rgb(252, 136, 42);
-}
-
-
-
-.unit_meuble_contener_img{
-    background-color: burlywood;
-}
-.unit_meuble_contener_img img{
-    display: flex;
+    overflow: hidden;
     width: 100%;
-    height: 20em;
-    object-fit: cover;
-}
-.unit_meuble_text{
-    margin-left: 1em;
-}
-.form_quantite{
-    margin-top: 2em;
-}
+    height: 15%;
+    font-size: 1em;
+  }
 
-
-
-
-/* MEDIA QUERIES */
-@media only screen and (max-width: 1800px){
-    .nav-liens:link,
-    .nav-liens:visited{
-        font-size: 1em;
-        padding: 0.625em;
-    }
-    .navigation{
-        padding: 0.625em 3.125em;
-    }
-    .logo-image{
-        width: 9.375em;
-    }
-}
-@media only screen and (max-width: 1100px){
-    .nav-liens:link,
-    .nav-liens:visited{
-        font-size: 1em;
-        padding: 0.625em;
-    }
-    .navigation{
-        padding: 0.625em 3.125em;
-    }
-    .logo-image{
-        width: 9.375em;
-    }
-}
-@media only screen and (max-width: 940px){
-    .navigation{
-        flex-direction: column;
-    }
-    .logo-lien{
-        margin-right: 0em;
-    }
-}
-@media only screen and (max-width: 750px){
-    .nav-liens:link,
-    .nav-liens:visited{
-        display: block;
-    }
-    .nav-liens:not(:last-child){
-        border-right: none;
-        border-bottom: 1px solid #ffee00;
-    }
-    
-    
-    .div_Meuble{
-        display: flex;
-        width: 100%;
-        height: 15em;
-        margin-bottom: 2em;
-        border: 2px solid #000000;
-        border-radius: 1.25em;
-    }
-    .meuble_contener_img{
-        display: flex;
-        width: 100%;
-        
-        
-    }
-    .meuble_contener_img img{
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        border-radius:  1.25em 0 0 1.25em;
-        margin-bottom: 0.5em;
-    }
-
-    .nom_Meuble{
-        width: 60%;
-        font-size: 1em;
-    }
-
-    .meuble_text{
-        display: flex;
-        
-        align-items: center;
-        text-align: center;
-        justify-content: space-around;
-        text-decoration: none;
-        color: black;
-        overflow: hidden;
-        width: 100%;
-        height: 15%;
-        font-size: 1em;
-        
-    }
-    
-    .prix_Meuble{
-        font-weight: bold;
-        width: 100%;
-    }
-    
+  .prix_Meuble {
+    font-weight: bold;
+    width: 100%;
+  }
 }

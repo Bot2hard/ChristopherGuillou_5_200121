@@ -1,8 +1,13 @@
-/*
-    une page “panier” contenant un résumé des produits dans le panier, le prix
-    total et un formulaire permettant de passer une commande. Les données
-    du formulaire doivent être correctes et bien formatées avant d'être
-    renvoyées au back-end. Par exemple, pas de texte dans les champs date ;
-*/
+const afficherPanier = () => {
+  const addToCart = request("http://localhost:3000/api/furniture");
+  addToCart.then((panier) => {
+    let local = JSON.parse(localStorage.getItem("panier"));
+    local?.length &&
+      local.forEach((pan, index) => {
+        monPanier(pan, index);
+      });
+    indexPanierr();
+  });
+};
 
-
+afficherPanier();
