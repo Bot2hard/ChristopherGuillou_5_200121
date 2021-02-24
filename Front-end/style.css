@@ -1,3 +1,72 @@
+/*
+      LoadSpin
+*/
+#wrapper {
+  position: fixed;
+  background-color: rgb(220, 157, 20);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: black;
+  z-index: 3;
+}
+.hidden {
+  animation: disparition 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes disparition {
+  100% {
+    opacity: 0;
+    display: none;
+    z-index: -1;
+  }
+}
+
+.load-spinner {
+  margin-top: 15em;
+  width: 10em;
+  height: 10em;
+  display: inline-block;
+  border: 3px solid rgba(0, 8, 8);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  margin-bottom: 4em;
+  animation: 1s spin infinite ease-in-out;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*SPINNER END*/
+.dots-loader > div {
+  width: 2em;
+  height: 2em;
+  background-color: rgba(0, 0, 0);
+  border-radius: 50%;
+  display: inline-block;
+  animation: 1.5s bounce infinite ease-in-out both;
+}
+
+.dots-loader .bounce {
+  animation-delay: -0.3s;
+}
+.dots-loader .bounce2 {
+  animation-delay: -0.15s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
 h1 {
   font-size: 3em;
   font-weight: 300;
@@ -149,24 +218,21 @@ h1 {
 /*
         CSS panier.html
 */
+.mainpan {
+  width: 100%;
+}
 .etatPanier {
-  display: flex;
   width: 100%;
   border: 1px dotted black;
 }
-.etatPanier img {
-  width: 33%;
+.etatPanier td {
+  width: 25em;
 }
-.divpanier {
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-  justify-content: space-around;
-  background-color: cadetblue;
+.getimage {
+  width: 5em;
+  height: 5em;
 }
 .delete_item {
-  width: 5%;
-  border-radius: 50%;
   border: none;
   cursor: pointer;
   font-size: 1.5em;

@@ -1,8 +1,6 @@
 // Liaison de l'id avec l'url (api)
 
 const afficherMeuble = async () => {
-  //const id = location.search.substring(4);
-
   let id = new URLSearchParams(window.location.search);
   id = id.get("id");
 
@@ -10,10 +8,14 @@ const afficherMeuble = async () => {
   if (myMeuble === "error server") {
     afficheError();
   } else if (!myMeuble._id) {
+    spinner();
+
     errorIdMeuble();
   } else {
+    spinner();
+
     afficheDetailProduit(myMeuble);
+    indexPanierr();
   }
-  indexPanierr();
 };
 afficherMeuble();

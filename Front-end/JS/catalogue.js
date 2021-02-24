@@ -7,6 +7,7 @@ const myVariable = () => {
       afficheError();
     } else {
       furniture.forEach((fur) => {
+        spinner();
         afficheProduit(fur);
       });
     }

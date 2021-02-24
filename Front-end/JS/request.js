@@ -7,8 +7,3 @@ const request = async (url) => {
     return "error server";
   }
 };
-const indexPanierr = () => {
-  let local = JSON.parse(localStorage.getItem("panier"));
-  let indexPan = document.querySelector("#indexPanier");
-  if (local?.length) indexPan.textContent = local.length;
-};

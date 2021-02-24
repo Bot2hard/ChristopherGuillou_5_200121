@@ -14,14 +14,25 @@
 
     <title>ORINOCO - Site de vente en ligne</title>
 
-    <script src="js/request.js" defer></script>
     <script src="js/view.js" defer></script>
+    <script src="js/request.js" defer></script>
+    
     <script src="js/catalogue.js" defer> </script>
 
 
 </head>
 
 <body>
+<div id="wrapper">
+        <!--SPINNER-->
+        <div class="load-spinner"></div>
+
+        <div class="dots-loader">
+            <div class="bounce"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
     <div class="bloc_page">
         <header>
             <nav class="navigation">
@@ -38,7 +49,7 @@
                 </div>
             </nav>
         </header>
-        <main>
+        <main id="main">
             <section id="listArticle">
                 <h1>
                     Votre magasin en ligne de meuble en bois massifs faits à la main
