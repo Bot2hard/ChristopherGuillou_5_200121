@@ -238,6 +238,28 @@ h1 {
   font-size: 1.5em;
 }
 
+/* css confirmation
+==================*/
+.csstable{
+  border: 1px dotted black;
+  border-radius: 1.25em;
+}
+.displayconfirmation{
+  width: 100%;
+}
+.displayconfirmation tr{
+display: flex;
+align-items: center;
+}
+td{
+  margin-right: 1em;
+}
+.imgarticle{
+
+width: 4em;
+height: 4em;
+}
+
 /* MEDIA QUERIES */
 @media only screen and (max-width: 1800px) {
   .nav-liens:link,

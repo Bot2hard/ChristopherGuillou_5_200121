@@ -30,6 +30,8 @@ const panierVide = () => {
   if (indexPan.textContent == 0) {
     let panierVide = document.getElementById("listPanier");
     panierVide.style.display = "none";
+    let displayPanier = document.getElementById("displaypanier");
+    displayPanier.style.display = "none";
 
     let textPanierVide = document.createElement("h1");
     let mainMessage = document.getElementById("tableauPanier");
@@ -52,13 +54,13 @@ const calculePanier = () => {
   let totalPanier = 0;
 
   let totalDuPanier = document.querySelector(".totalPanier");
-  console.log(totalDuPanier);
   local?.length &&
     local.forEach((pan) => {
       totalPanier += pan.prix * pan.qty;
     });
   totalDuPanier.textContent = "Total du panier :" + formatagePrix(totalPanier);
 };
+
 
 const formatagePrix = (p) => {
   let number = p / 100;
@@ -245,7 +247,12 @@ const afficheDetailProduit = (myMeuble) => {
 
   ecouteBtn.addEventListener("click", (e) => {
     let ecouteBtn = document.getElementById("inputMeuble");
+    let id =  Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+
     let infoMyMeuble = {
+      uniqId : id,
       name: myMeuble.name,
       id: myMeuble._id,
       prix: myMeuble.price,
@@ -260,6 +267,7 @@ const afficheDetailProduit = (myMeuble) => {
     let local = JSON.parse(localStorage.getItem("panier"));
 
     local.push(ecouteBtn);
+
     localStorage.setItem("panier", JSON.stringify(local));
     indexPanierr();
   });
@@ -267,12 +275,17 @@ const afficheDetailProduit = (myMeuble) => {
 
 const monPanier = (pan, index) => {
   // racine html
+
+  const idUnique = pan.uniqId;
   let getPan = document.querySelector("#main");
+  let displayPan = document.getElementById("displaypanier");
 
   let getPanier = document.createElement("tr");
-  getPanier.setAttribute("id", index);
+  getPanier.setAttribute("id", idUnique);
   getPanier.setAttribute("class", "etatPanier");
-  getPan.appendChild(getPanier);
+  displayPan.appendChild(getPanier);
+
+  
 
   let tdGetImage = document.createElement("td");
   getPanier.appendChild(tdGetImage);
@@ -311,35 +324,33 @@ const monPanier = (pan, index) => {
 
   // event de suppression
   deleteItem.addEventListener("click", (e) => {
-    let local = JSON.parse(localStorage.getItem("panier"));
+    //let local = JSON.parse(localStorage.getItem("panier"));
+    let suppEltPanier = document.getElementById(idUnique);
 
-    let suppEltPanier = document.getElementById(index);
     suppEltPanier.parentNode.removeChild(suppEltPanier);
-    deleteElt(index);
+    deleteElt(idUnique);
+    console.log(idUnique);
+
     indexPanierr();
     calculePanier();
-    // if (indexPanierr() == 0) {
     panierVide();
-    // }
   });
 };
-const deleteElt = () => {
+const deleteElt = (idUnique) => {
   let local = JSON.parse(localStorage.getItem("panier"));
-  local.splice(0, 1);
+  //local.splice(index, 1);
+  let newLocal = local.filter(prod => prod.uniqId !== idUnique )
+  console.log(idUnique);
+
   localStorage.clear();
-  localStorage.setItem("panier", JSON.stringify(local));
+  localStorage.setItem("panier", JSON.stringify(newLocal));
 };
 
 const formulaire = () => {
-  var pseudo = document.getElementById("pseudo");
-  var mdp = document.getElementById("mdp");
-  var mdp2 = document.getElementById("mpd2");
-  var mail = document.getElementById("mail");
-  var nom = document.getElementById("nom");
-  var cp = document.getElementById("cp");
-  let local = JSON.parse(localStorage.getItem("panier"));
 
   let getPan = document.getElementById("main");
+  let displayPan = document.getElementById("displaypanier");
+
 
   let deleteAllItem = document.createElement("button");
   deleteAllItem.setAttribute("class", "delete_all_item");
@@ -347,7 +358,7 @@ const formulaire = () => {
 
   let divSupp = document.createElement("div");
   divSupp.setAttribute("id", "divSupp");
-  getPan.appendChild(divSupp);
+  displayPan.appendChild(divSupp);
   divSupp.appendChild(deleteAllItem);
 
   let totalDuPanier = document.createElement("span");
@@ -361,4 +372,154 @@ const formulaire = () => {
     window.location.reload();
     panierVide();
   });
+
+  let nom = document.getElementById("nom");
+  let nomManquant = document.getElementById("nom_M");
+  let nomValid = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+
+  let prenom = document.getElementById("prenom");
+  let prenomManquant = document.getElementById("prenom_M");
+  let prenomValid = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+
+  let email = document.getElementById("email");
+  let mailManquant = document.getElementById("mail_M");
+  let mailValid = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+
+  let adress = document.getElementById("adress");
+  let adressManquant = document.getElementById("adress_M");
+  let adressValid = /[a-zA-Z0-9]/;
+
+document.forms["inscription"].addEventListener("submit", (e)=>{
+  e.preventDefault();
+  
+	let erreur;
+	let inputs = this.document.getElementsByTagName("input");
+  let spans = this.document.getElementsByTagName("span");
+
+
+	// Traitement générique
+  for(let i=0; i<spans.length; i++){
+    if(spans[i].textContent == "format incorrect"){
+      return false;
+    }
+  }
+
+	for (let i = 0; i < inputs.length; i++) {
+		if (!inputs[i].value) {
+			erreur = "Veuillez renseigner tous les champs";
+		}
+	}
+
+	if (erreur) {
+		e.preventDefault();
+		document.getElementById("erreur").innerHTML = erreur;
+		return false;
+	} else {
+		alert('Formulaire envoyé !');
+    let contact = {
+      firstName: inputs["nom"].value,
+      lastName: inputs["prenom"].value,
+      address: inputs["adress"].value,
+      city: inputs["ville"].value,
+      email: inputs["email"].value,
+    };
+    postData(contact);  
+	}
+});
+
+  //traitement cas par cas
+
+document.forms['inscription']["nom"].addEventListener("input",(e) =>{
+  if (nomValid.test(nom.value) == false) {
+    e.preventDefault();
+    nomManquant.textContent = "format incorrect";
+    nomManquant.style.color = "orange";
+  }else{
+    nomManquant.textContent = "";
+  }
+})
+
+document.forms['inscription']["prenom"].addEventListener("input",(e) =>{
+  if (prenomValid.test(prenom.value) == false) {
+    e.preventDefault();
+    prenomManquant.textContent = "format incorrect";
+    prenomManquant.style.color = "orange";
+  }else{
+    prenomManquant.textContent = "";
+  }
+})
+
+document.forms['inscription']["email"].addEventListener("input",(e) =>{
+  if (mailValid.test(email.value) == false) {
+    e.preventDefault();
+    mailManquant.textContent = "format incorrect";
+    mailManquant.style.color = "orange";
+  }
+  else{
+    mailManquant.textContent = "";
+  }
+})
+
+document.forms['inscription']["adress"].addEventListener("input",(e) =>{
+  if (adressValid.test(adress.value) == false) {
+    e.preventDefault();
+    adressManquant.textContent = "format incorrect";
+    adressManquant.style.color = "orange";
+  }
+  else{
+    adressManquant.textContent = "";
+  }
+})
 };
+
+const postData = (contact)=>{
+
+  let local = JSON.parse(localStorage.getItem("panier"));
+  let products = [];
+  local.forEach((product)=>{
+    products.push(product.id)
+  })
+  let data = {
+    contact,
+    products,
+  }
+  usersData(data);
+}
+
+const displayConfirmation = (product) =>{
+
+  let local = JSON.parse(localStorage.getItem("panier"));
+  let confMain = document.getElementById("main");
+  let orderId = document.getElementById("orderId");
+  orderId.innerHTML= "Numéro de commande : " + local.orderId;
+
+  let recapAchat = document.getElementById("displayconfirmation");
+
+  let displayRecap = document.createElement("tr");
+  recapAchat.appendChild(displayRecap);
+
+  let displayPurchase = document.createElement("td");
+  let imgPurchase = document.createElement("img");
+  imgPurchase.setAttribute("src", product.imageUrl);
+  imgPurchase.setAttribute("class", "imgarticle");
+  displayRecap.appendChild(displayPurchase);
+  displayPurchase.appendChild(imgPurchase);
+
+  let namePurchase = document.createElement("td");
+  displayRecap.appendChild(namePurchase);
+  namePurchase.innerHTML = product.name;
+
+  let pricePurchase = document.createElement("td");
+  displayRecap.appendChild(pricePurchase);
+  pricePurchase.innerHTML = "prix unitaire : " + formatagePrix(product.price);
+
+};
+const totalCommande = (local)=>{
+  let total = 0;
+  let spanTotal = document.getElementById("totalcommand");
+
+  local.products.forEach((product)=>{
+    total += product.price ;
+  });
+  spanTotal.innerHTML= "prix total : " + formatagePrix(total);
+}

@@ -49,6 +49,7 @@ exports.getOneFurniture = (req, res, next) => {
  *
  */
 exports.orderFurniture = (req, res, next) => {
+  console.log(req.body);
   if (!req.body.contact ||
     !req.body.contact.firstName ||
     !req.body.contact.lastName ||

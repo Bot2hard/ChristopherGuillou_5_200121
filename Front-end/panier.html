@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ORINICO - Site de vente en ligne - le e-commerce spécialisé pour vous">
+    <meta name="description" content="ORINOCO - Site de vente en ligne - le e-commerce spécialisé pour vous">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/ico" href="img/favicon.ico">
 
@@ -37,14 +37,43 @@
         </header>
         <main id="main" class="mainpan">
             <section id="listPanier" class="listPanier">
-            <h1 class="title"> ORINOCO - Vous etes dans votre panier </h1>
-        </section>
+                <h1 class="title"> ORINOCO - Vous etes dans votre panier </h1>
+            </section>
 
-           
             <table id="tableauPanier"></table>
+            <div id="displaypanier">
 
-            
-            
+                <form method="POST" name="inscription" id="inscription">
+                    <label for="nom"></label>
+                    <input type="text" name="nom" id="nom" placeholder="Nom">
+                    <span id="nom_M"></span><br>
+                    <label for="prenom"></label>
+                    <input type="text" name="prenom" id="prenom" placeholder="Prenom">
+                    <span id="prenom_M"></span><br>
+
+                    <label for="email"></label>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <span id="mail_M"></span><br>
+
+                    <label for="adress"></label>
+                    <input type="text" name="adress" id="adress" placeholder="Adresse">
+                    <span id="adress_M"></span><br>
+
+                    <label for="ville"></label>
+                    <input type="text" name="ville" id="ville" placeholder="Ville"><br>
+
+                    <label for="submit"></label>
+                    <input type="submit" name="submit" value="Inscription">
+                </form>
+
+                <p style="color: red;" id="erreur"></p>
+
+            </div>
+
+            <footer>
+
+                Le footer !
+            </footer>
         </main>
     </div>
 </body>

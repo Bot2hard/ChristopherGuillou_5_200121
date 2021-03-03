@@ -1,5 +1,11 @@
-/*
-    une page de confirmation de commande, remerciant l'utilisateur pour sa
-    commande, et indiquant le prix total et l'identifiant de commande envoyé
-    par le serveur.
-*/
+
+const confirmation = () => {
+    let local = JSON.parse(localStorage.getItem("panier"));
+
+    local.products.forEach((product) => {
+        displayConfirmation(product);
+    });
+    totalCommande(local);
+};
+confirmation();
+

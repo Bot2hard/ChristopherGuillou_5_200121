@@ -11,10 +11,3 @@ const afficherPanier = () => {
 
 afficherPanier();
 
-/*
-if (local === null) {
-    return panierVide();
-  } else {
-    local?.length && afficherMonPanier(local);
-  }
-*/
