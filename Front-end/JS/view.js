@@ -61,7 +61,6 @@ const calculePanier = () => {
   totalDuPanier.textContent = "Total du panier :" + formatagePrix(totalPanier);
 };
 
-
 const formatagePrix = (p) => {
   let number = p / 100;
   number = new Intl.NumberFormat("fr-FR", {
@@ -74,12 +73,10 @@ const formatagePrix = (p) => {
 const afficheProduit = (fur) => {
   /* racine semantique de la page index.html
 ========================================*/
-
   let listArticle = document.getElementById("listArticle");
 
   /* Creation de la semantique index.html et attribut (class, src, alt)
 ===================================================================*/
-
   let divMeuble = document.createElement("a");
   divMeuble.setAttribute("class", "div_Meuble");
   divMeuble.setAttribute("href", "produit.html?id=" + fur._id);
@@ -107,7 +104,6 @@ const afficheProduit = (fur) => {
 
   /*  Et mise en forme de la semantique
 ===================================*/
-
   listArticle.appendChild(divMeuble);
   divMeuble.appendChild(meubleContenerImg);
   meubleContenerImg.appendChild(imageMeuble);
@@ -118,7 +114,6 @@ const afficheProduit = (fur) => {
 
   /* envoie de contenu vers les balises
 ====================================*/
-
   nomMeuble.textContent = fur.name;
   prixMeuble.textContent = "prix : " + formatagePrix(fur.price);
   choixMeuble.textContent = "Informations";
@@ -130,12 +125,10 @@ const afficheDetailProduit = (myMeuble) => {
 
   /* racine semantique de la page produit.html
 ==========================================*/
-
   let uniteMeuble = document.getElementById("unite_meuble");
 
   /* Creation de la semantique produit.html et attribut (class, src, alt ...)
 ========================================================================*/
-
   let divMeubleUnit = document.createElement("section");
   divMeubleUnit.setAttribute("class", "unit_Meuble");
 
@@ -193,7 +186,6 @@ const afficheDetailProduit = (myMeuble) => {
 
   /* Et mise en forme de la semantique
 ==================================*/
-
   uniteMeuble.appendChild(divMeubleUnit);
   divMeubleUnit.appendChild(unitMeubleContenerImg);
   unitMeubleContenerImg.appendChild(unitImageMeuble);
@@ -211,7 +203,6 @@ const afficheDetailProduit = (myMeuble) => {
 
   /* envoie de contenu vers les balises
 ===================================*/
-
   unitNomMeuble.textContent = myMeuble.name;
   unitDescription.textContent = myMeuble.description;
   unitPrixMeuble.textContent = "prix : " + formatagePrix(myMeuble.price);
@@ -226,7 +217,6 @@ const afficheDetailProduit = (myMeuble) => {
   });
   /* creation d'un selection/option pour le choix des quantités
 ==========================================================*/
-
   let tabQuantite = Array.from(Array(6).keys()).slice(1);
 
   tabQuantite.forEach((qte) => {
@@ -237,7 +227,6 @@ const afficheDetailProduit = (myMeuble) => {
 
   /* localStorage
 ===============*/
-
   let ecouteBtn = document.getElementById("inputMeuble");
   let selectionQty = document.getElementById("selectionQuantite");
 
@@ -269,13 +258,24 @@ const afficheDetailProduit = (myMeuble) => {
     local.push(ecouteBtn);
 
     localStorage.setItem("panier", JSON.stringify(local));
+
+    if (localStorage.getItem("confirme") === null) {
+      localStorage.setItem("confirme", "[]");
+    }
+    let localConf = JSON.parse(localStorage.getItem("confirme"));
+
+    localConf.push(infoMyMeuble);
+
+    localStorage.setItem("confirme", JSON.stringify(localConf));
+
+    window.location = "./index.html";
+
     indexPanierr();
   });
 };
 
 const monPanier = (pan, index) => {
   // racine html
-
   const idUnique = pan.uniqId;
   let getPan = document.querySelector("#main");
   let displayPan = document.getElementById("displaypanier");
@@ -284,8 +284,6 @@ const monPanier = (pan, index) => {
   getPanier.setAttribute("id", idUnique);
   getPanier.setAttribute("class", "etatPanier");
   displayPan.appendChild(getPanier);
-
-  
 
   let tdGetImage = document.createElement("td");
   getPanier.appendChild(tdGetImage);
@@ -312,7 +310,7 @@ const monPanier = (pan, index) => {
 
   let prixTotal = document.createElement("td");
   getPanier.appendChild(prixTotal);
-  prixTotal.innerHTML = formatagePrix(pan.prix * pan.qty);
+  prixTotal.innerHTML ="total article : " + formatagePrix(pan.prix * pan.qty);
 
   let btnDeleteItem = document.createElement("td");
   getPanier.appendChild(btnDeleteItem);
@@ -324,7 +322,6 @@ const monPanier = (pan, index) => {
 
   // event de suppression
   deleteItem.addEventListener("click", (e) => {
-    //let local = JSON.parse(localStorage.getItem("panier"));
     let suppEltPanier = document.getElementById(idUnique);
 
     suppEltPanier.parentNode.removeChild(suppEltPanier);
@@ -338,19 +335,21 @@ const monPanier = (pan, index) => {
 };
 const deleteElt = (idUnique) => {
   let local = JSON.parse(localStorage.getItem("panier"));
-  //local.splice(index, 1);
-  let newLocal = local.filter(prod => prod.uniqId !== idUnique )
+  let newLocal = local.filter(prod => prod.uniqId !== idUnique );
+
+  let localConf = JSON.parse(localStorage.getItem("confirme"));
+  let newLocal2 = localConf.filter(prod => prod.uniqId !== idUnique )
   console.log(idUnique);
 
   localStorage.clear();
   localStorage.setItem("panier", JSON.stringify(newLocal));
+  localStorage.setItem("confirme", JSON.stringify(newLocal2));
+
 };
 
 const formulaire = () => {
-
   let getPan = document.getElementById("main");
   let displayPan = document.getElementById("displaypanier");
-
 
   let deleteAllItem = document.createElement("button");
   deleteAllItem.setAttribute("class", "delete_all_item");
@@ -367,6 +366,8 @@ const formulaire = () => {
 
   deleteAllItem.addEventListener("click", (e) => {
     localStorage.removeItem("panier");
+    localStorage.removeItem("confirme");
+
     let mainPanier = document.querySelector(".mainpan");
     mainPanier.parentNode.removeChild(mainPanier);
     window.location.reload();
@@ -388,6 +389,10 @@ const formulaire = () => {
   let adress = document.getElementById("adress");
   let adressManquant = document.getElementById("adress_M");
   let adressValid = /[a-zA-Z0-9]/;
+
+  let ville = document.getElementById("ville");
+  let villeManquant = document.getElementById("ville_M");
+  let villeValid = /^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
 
 document.forms["inscription"].addEventListener("submit", (e)=>{
   e.preventDefault();
@@ -426,21 +431,21 @@ document.forms["inscription"].addEventListener("submit", (e)=>{
     postData(contact);  
 	}
 });
-
-  //traitement cas par cas
-
+/*traitement cas par cas
+==========================*/
 document.forms['inscription']["nom"].addEventListener("input",(e) =>{
-  if (nomValid.test(nom.value) == false) {
+  if(nom.value.length !== nom.value.trim().length || nomValid.test(nom.value) == false){
     e.preventDefault();
     nomManquant.textContent = "format incorrect";
     nomManquant.style.color = "orange";
-  }else{
+  }
+  else{
     nomManquant.textContent = "";
   }
 })
 
 document.forms['inscription']["prenom"].addEventListener("input",(e) =>{
-  if (prenomValid.test(prenom.value) == false) {
+  if (prenom.value.length !== prenom.value.trim().length || prenomValid.test(prenom.value) == false) {
     e.preventDefault();
     prenomManquant.textContent = "format incorrect";
     prenomManquant.style.color = "orange";
@@ -450,7 +455,7 @@ document.forms['inscription']["prenom"].addEventListener("input",(e) =>{
 })
 
 document.forms['inscription']["email"].addEventListener("input",(e) =>{
-  if (mailValid.test(email.value) == false) {
+  if (email.value.length !== email.value.trim().length || mailValid.test(email.value) == false) {
     e.preventDefault();
     mailManquant.textContent = "format incorrect";
     mailManquant.style.color = "orange";
@@ -461,7 +466,7 @@ document.forms['inscription']["email"].addEventListener("input",(e) =>{
 })
 
 document.forms['inscription']["adress"].addEventListener("input",(e) =>{
-  if (adressValid.test(adress.value) == false) {
+  if (adress.value.length !== adress.value.trim().length || adressValid.test(adress.value) == false) {
     e.preventDefault();
     adressManquant.textContent = "format incorrect";
     adressManquant.style.color = "orange";
@@ -469,15 +474,25 @@ document.forms['inscription']["adress"].addEventListener("input",(e) =>{
   else{
     adressManquant.textContent = "";
   }
-})
+});
+
+document.forms['inscription']["ville"].addEventListener("input",(e) =>{
+  if (ville.value.length !== ville.value.trim().length || villeValid.test(ville.value) == false) {
+    e.preventDefault();
+    villeManquant.textContent = "format incorrect";
+    villeManquant.style.color = "orange";
+  }
+  else{
+    villeManquant.textContent = "";
+  }
+});
 };
 
-const postData = (contact)=>{
-
+const postData = (contact, pan)=>{
   let local = JSON.parse(localStorage.getItem("panier"));
   let products = [];
   local.forEach((product)=>{
-    products.push(product.id)
+    products.push(product.id);
   })
   let data = {
     contact,
@@ -487,8 +502,8 @@ const postData = (contact)=>{
 }
 
 const displayConfirmation = (product) =>{
-
   let local = JSON.parse(localStorage.getItem("panier"));
+
   let confMain = document.getElementById("main");
   let orderId = document.getElementById("orderId");
   orderId.innerHTML= "Numéro de commande : " + local.orderId;
@@ -500,7 +515,7 @@ const displayConfirmation = (product) =>{
 
   let displayPurchase = document.createElement("td");
   let imgPurchase = document.createElement("img");
-  imgPurchase.setAttribute("src", product.imageUrl);
+  imgPurchase.setAttribute("src", product.pic);
   imgPurchase.setAttribute("class", "imgarticle");
   displayRecap.appendChild(displayPurchase);
   displayPurchase.appendChild(imgPurchase);
@@ -511,15 +526,23 @@ const displayConfirmation = (product) =>{
 
   let pricePurchase = document.createElement("td");
   displayRecap.appendChild(pricePurchase);
-  pricePurchase.innerHTML = "prix unitaire : " + formatagePrix(product.price);
+  pricePurchase.innerHTML = "prix unitaire : " + formatagePrix(product.prix);
 
+  let qtyPurchase = document.createElement("td");
+  displayRecap.appendChild(qtyPurchase);
+  qtyPurchase.innerHTML = "Quantité : " + product.qty;
+
+  let retourAccueil = document.getElementById("backtomain");
+  retourAccueil.innerHTML = "retour accueil";
 };
+
 const totalCommande = (local)=>{
+  let localConf = JSON.parse(localStorage.getItem("confirme"));
   let total = 0;
   let spanTotal = document.getElementById("totalcommand");
-
-  local.products.forEach((product)=>{
-    total += product.price ;
+  localConf.forEach((product)=>{
+    total += product.prix * product.qty ;
   });
   spanTotal.innerHTML= "prix total : " + formatagePrix(total);
 }
+

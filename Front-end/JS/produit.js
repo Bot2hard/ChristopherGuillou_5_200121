@@ -1,5 +1,3 @@
-// Liaison de l'id avec l'url (api)
-
 const afficherMeuble = async () => {
   let id = new URLSearchParams(window.location.search);
   id = id.get("id");

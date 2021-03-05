@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ORINOCO - Site de vente en ligne - le e-commerce spécialisé pour vous">
+
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/ico" href="img/favicon.ico">
-
-
 
     <script src="https://kit.fontawesome.com/7006402bdc.js" crossorigin="anonymous"></script>
 
     <title>ORINOCO - Site de vente en ligne</title>
+
     <script src="js/request.js" defer></script>
     <script src="js/view.js" defer></script>
     <script src="js/confirmation.js" defer></script>
-
-
-
 </head>
 
 <body>
@@ -26,12 +23,17 @@
     <div class="bloc_page">
         <header>
             <nav class="navigation">
-                <a href="index.html" class="logo-lien">
+                <a href="index.html" class="logo-lien" id="back">
                     <img src="img/logo.png"
                         alt="logo ORINOCO - Site de vente en ligne - un caddie de couleur bleu et violet"
                         class="logo-image">
                 </a>
-
+                <div class="liens">
+                    <a href="index.html" class="nav-liens">Accueil</a>
+                    <a href="panier.html" class="nav-liens">
+                        <i class="fas fa-shopping-cart fa-1x"></i> (<span id="indexPanier"></span>)
+                    </a>
+                </div>
             </nav>
         </header>
         <main id="main">
@@ -39,7 +41,6 @@
                 <h1>
                     Confirmation de commande
                 </h1>
-
                 <p>
                     Bonjour,<br> ORINOCO vous remercie de votre confiance. <br> Voici le recapitulatif de votre
                     commande.
@@ -51,14 +52,11 @@
 
                 </table>
                 <span id="totalcommand"></span>
-
-
+                <a href="index.html" id="backtomain"></a>
             </div>
 
         </main>
-
         <footer>
-
             Le footer !
         </footer>
     </div>
