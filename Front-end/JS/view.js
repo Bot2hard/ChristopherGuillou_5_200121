@@ -99,7 +99,6 @@ const afficheProduit = (fur) => {
 
   let choixMeuble = document.createElement("a");
   choixMeuble.setAttribute("href", "produit.html?id=" + fur._id);
-  //console.log(choixMeuble); test result 5 id
   choixMeuble.setAttribute("class", "info_Meuble");
 
   /*  Et mise en forme de la semantique
@@ -116,7 +115,7 @@ const afficheProduit = (fur) => {
 ====================================*/
   nomMeuble.textContent = fur.name;
   prixMeuble.textContent = "prix : " + formatagePrix(fur.price);
-  choixMeuble.textContent = "Informations";
+  choixMeuble.textContent = "i";
 };
 
 const afficheDetailProduit = (myMeuble) => {

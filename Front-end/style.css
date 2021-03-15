@@ -118,7 +118,7 @@ h1 {
   text-align: center;
   font-size: 2em;
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 #listArticle {
   display: flex;
@@ -168,10 +168,10 @@ h1 {
   width: 40%;
 }
 .info_Meuble {
-  width: 6em;
+  width: 1.5em;
   height: 1.3em;
   border: 2px solid black;
-  border-radius: 1.25em;
+  border-radius: 50%;
   text-align: center;
   text-decoration: none;
   color: black;
@@ -222,11 +222,13 @@ h1 {
   width: 100%;
 }
 .etatPanier {
+  display: flex;
+  align-items: center;
   width: 100%;
   border: 1px dotted black;
 }
 .etatPanier td {
-  width: 25em;
+  width: 35%;
 }
 .getimage {
   width: 5em;
@@ -237,6 +239,13 @@ h1 {
   cursor: pointer;
   font-size: 1.5em;
 }
+.displayform{
+  display: flex;
+  justify-content: center;
+}
+form input{
+  margin-right: 0.5em;
+}
 
 /* css confirmation
 ==================*/
@@ -244,16 +253,7 @@ h1 {
   border: 1px dotted black;
   border-radius: 1.25em;
 }
-.displayconfirmation{
-  width: 100%;
-}
-.displayconfirmation tr{
-display: flex;
-align-items: center;
-}
-td{
-  margin-right: 1em;
-}
+
 .imgarticle{
 width: 4em;
 height: 4em;
@@ -331,7 +331,6 @@ height: 4em;
 
   .meuble_text {
     display: flex;
-
     align-items: center;
     text-align: center;
     justify-content: space-around;
@@ -345,6 +344,32 @@ height: 4em;
 
   .prix_Meuble {
     font-weight: bold;
+    width: 50%;
+  }
+
+  .displaypanier{
     width: 100%;
+  }
+
+  td{
+    margin-right: 0;
+  }
+  
+  .etatPanier{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .etatPanier tr{
+    width: 100%;
+  }
+  .etatPanier td{
+    width: auto;
+  }
+
+  .etatPanier img{
+    width: 100%;
+    object-fit: cover;
   }
 }
