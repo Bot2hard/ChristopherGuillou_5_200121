@@ -74,7 +74,6 @@ const afficheProduit = (fur) => {
   /* racine semantique de la page index.html
 ========================================*/
   let listArticle = document.getElementById("listArticle");
-
   /* Creation de la semantique index.html et attribut (class, src, alt)
 ===================================================================*/
   let divMeuble = document.createElement("a");
@@ -248,7 +247,10 @@ const afficheDetailProduit = (myMeuble) => {
       pic: myMeuble.imageUrl,
     };
     ecouteBtn = infoMyMeuble;
+/* creation local storatge
+========================*/
 
+// key panier
     if (localStorage.getItem("panier") === null) {
       localStorage.setItem("panier", "[]");
     }
@@ -258,15 +260,15 @@ const afficheDetailProduit = (myMeuble) => {
 
     localStorage.setItem("panier", JSON.stringify(local));
 
+// key confirme
     if (localStorage.getItem("confirme") === null) {
       localStorage.setItem("confirme", "[]");
     }
     let localConf = JSON.parse(localStorage.getItem("confirme"));
-
     localConf.push(infoMyMeuble);
-
     localStorage.setItem("confirme", JSON.stringify(localConf));
 
+// redirection vers index une fois l'ajout au panier
     window.location = "./index.html";
 
     indexPanierr();
@@ -395,11 +397,9 @@ const formulaire = () => {
 
 document.forms["inscription"].addEventListener("submit", (e)=>{
   e.preventDefault();
-  
 	let erreur;
 	let inputs = this.document.getElementsByTagName("input");
   let spans = this.document.getElementsByTagName("span");
-
 
 	// Traitement générique
   for(let i=0; i<spans.length; i++){

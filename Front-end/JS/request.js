@@ -7,7 +7,6 @@ const request = async (url) => {
     return "error server";
   }
 };
-
   
 const usersData = (data)=>{
 const promise = fetch("http://localhost:3000/api/furniture/order", {
